@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapp_tt/core/routing/routes.dart';
+import 'package:pokeapp_tt/core/theme/theme.dart';
 
 void main() {
   runApp(const PokemonApp());
@@ -9,14 +11,11 @@ class PokemonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'PokeApp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
+      theme: AppTheme.lightTheme,
+      routerConfig: AppRoutes.router,
     );
   }
 }
