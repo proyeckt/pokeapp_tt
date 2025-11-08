@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokeapp_tt/features/onboarding/model/onboarding_step.dart';
-import 'package:pokeapp_tt/features/onboarding/widgets/onboarding_step_widget.dart';
+import 'package:pokeapp_tt/features/onboarding/presentation/widgets/onboarding_step_widget.dart';
 
 class OnboardingPage extends StatefulWidget {
   final List<OnboardingStep> steps;

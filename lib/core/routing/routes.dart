@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokeapp_tt/features/home/presentation/pages/home_page.dart';
 import 'package:pokeapp_tt/features/onboarding/data/onboarding_steps.dart';
-import 'package:pokeapp_tt/features/onboarding/pages/onboarding_page.dart';
-import 'package:pokeapp_tt/main.dart';
+import 'package:pokeapp_tt/features/onboarding/presentation/pages/onboarding_page.dart';
 
 // Route names for easy reference
 class AppRoutes {
@@ -27,14 +27,14 @@ class AppRoutes {
   );
 
   static List<RouteBase> get _routes => [
-    GoRoute(
-      path: AppRoutes.onboarding,
-      builder: (context, __) => OnboardingPage(
-        steps: onboardingSteps,
-        onCompleted: () => context.push(AppRoutes.home),
-        onSkipped: () => context.push(AppRoutes.home),
-      ),
-    ),
-    GoRoute(path: '/home', builder: (_, __) => HomePage()),
-  ];
+        GoRoute(
+          path: AppRoutes.onboarding,
+          builder: (context, __) => OnboardingPage(
+            steps: onboardingSteps,
+            onCompleted: () => context.push(AppRoutes.home),
+            onSkipped: () => context.push(AppRoutes.home),
+          ),
+        ),
+        GoRoute(path: '/home', builder: (_, __) => HomePage()),
+      ];
 }
