@@ -6,6 +6,8 @@ class AppColors {
   static const Color secondaryColor = Color(0xFF173EA5);
   static const Color tertiaryColor = Color(0xFF0D47A1);
 
+  static const Color removeActionColor = Color(0xFFCD3131);
+
   // Shadows
   static const Color blackBoxShadowColor = Color(0x1F000000);
 

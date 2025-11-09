@@ -15,9 +15,17 @@ class PokemonRepositoryImpl implements PokemonRepository {
       final response = await _dio.get(url);
       final model = PokemonResponseModel.fromJson(response.data);
 
-      final pokemons = model.results
-          .map((e) => PokemonEntity(name: e.name, imageUrl: e.url))
-          .toList();
+      final pokemons = model.results.map((e) {
+        // Extract the Pokémon ID from the URL
+        final id = int.parse(e.url.split('/').where((s) => s.isNotEmpty).last);
+
+        return PokemonEntity(
+          id: id,
+          name: e.name,
+          imageUrl:
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png',
+        );
+      }).toList();
 
       return (pokemons, model.next);
     } catch (e) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pokeapp_tt/core/presentation/pages/soon_page.dart';
 import 'package:pokeapp_tt/core/theme/colors.dart';
+import 'package:pokeapp_tt/features/pokedex/presentation/pages/favorites_page.dart';
 import 'package:pokeapp_tt/features/pokedex/presentation/pages/pokedex_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,9 +17,9 @@ class _HomePageState extends State<HomePage> {
 
   final _pages = [
     PokedexPage(),
-    const Center(child: Text('Regiones')),
-    const Center(child: Text('Favoritos')),
-    const Center(child: Text('Perfil')),
+    SoonPage(),
+    FavoritesPage(),
+    SoonPage(),
   ];
 
   @override

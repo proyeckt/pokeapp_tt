@@ -1,11 +1,23 @@
 class PokemonEntity {
+  final int id;
   final String name;
   final String imageUrl;
 
-  const PokemonEntity({required this.name, required this.imageUrl});
+  const PokemonEntity({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+  });
 
-  int get id {
-    final parts = imageUrl.split('/');
-    return int.tryParse(parts[parts.length - 2]) ?? 0;
-  }
+  factory PokemonEntity.fromJson(Map<String, dynamic> json) => PokemonEntity(
+        id: json['id'] as int,
+        name: json['name'] as String,
+        imageUrl: json['imageUrl'] as String,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'imageUrl': imageUrl,
+      };
 }

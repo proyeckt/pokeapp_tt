@@ -48,14 +48,15 @@ class _PokemonCardState extends State<PokemonCard>
         onTap: () {},
         child: Container(
           height: 128,
+          width: double.infinity,
           decoration: BoxDecoration(
             gradient: gradient,
           ),
           child: Stack(
             children: [
               Positioned(
-                right: 12,
-                top: 36,
+                right: 20,
+                top: 40,
                 child: Image.network(
                   widget.pokemon.imageUrl,
                   fit: BoxFit.contain,

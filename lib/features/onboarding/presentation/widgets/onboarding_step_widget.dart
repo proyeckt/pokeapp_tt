@@ -29,7 +29,9 @@ class OnboardingStepWidget extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) => Container(
                 width: 250,
                 height: 250,
-                decoration: BoxDecoration(color: Colors.grey.shade200),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.grey.shade200),
                 child: const Icon(Icons.image_not_supported, size: 100),
               ),
             ),
