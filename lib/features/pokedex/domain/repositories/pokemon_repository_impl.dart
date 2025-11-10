@@ -15,8 +15,15 @@ class PokemonRepositoryImpl implements PokemonRepository {
     final response = await _dio.get(url);
     final model = PokemonResponseModel.fromJson(response.data);
 
-    final pokemons = model.results.map((e) {
+    final futures = model.results.map((e) async {
       final id = int.parse(e.url.split('/').where((s) => s.isNotEmpty).last);
+
+      final detailsResponse = await _dio.get(e.url);
+      final data = detailsResponse.data;
+
+      final types = (data['types'] as List)
+          .map<String>((t) => t['type']['name'].toString())
+          .toList();
 
       // Base data for list display
       return PokemonEntity(
@@ -24,7 +31,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
         name: e.name,
         imageUrl:
             'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png',
-        types: const [],
+        types: types,
         height: 0,
         weight: 0,
         baseExperience: 0,
@@ -37,6 +44,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
       );
     }).toList();
 
+    final pokemons = await Future.wait(futures);
     return (pokemons, model.next);
   }
 

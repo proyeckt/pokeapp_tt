@@ -23,10 +23,10 @@ class PokemonDetailController extends StateNotifier<AsyncValue<PokemonEntity>> {
 
   PokemonDetailController(this._getDetails, this.id)
       : super(const AsyncValue.loading()) {
-    _loadDetails();
+    loadDetails();
   }
 
-  Future<void> _loadDetails() async {
+  Future<void> loadDetails() async {
     try {
       final details = await _getDetails(id);
       state = AsyncValue.data(details);

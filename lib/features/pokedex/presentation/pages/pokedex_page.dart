@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokeapp_tt/core/constants/pokemon_types.dart';
+import 'package:pokeapp_tt/core/extensions/string_extensions.dart';
 import 'package:pokeapp_tt/core/presentation/pages/error_page.dart';
 import 'package:pokeapp_tt/core/theme/colors.dart';
+import 'package:pokeapp_tt/core/utils/pokemon_type_mapper.dart';
 import 'package:pokeapp_tt/features/pokedex/presentation/controllers/favorites_controller.dart';
 import 'package:pokeapp_tt/features/pokedex/presentation/controllers/pokedex_controller.dart';
 import 'package:pokeapp_tt/features/pokedex/presentation/widgets/pokemon_card.dart';
@@ -195,7 +197,10 @@ class PokedexPage extends ConsumerWidget {
                           final isSelected = state.selectedTypes.contains(type);
 
                           return CheckboxListTile(
-                            title: Text(type),
+                            title: Text(
+                              PokemonTypeMapper.getSpanishType(type)
+                                  .capitalize(),
+                            ),
                             activeColor: AppColors.tertiaryColor,
                             value: isSelected,
                             checkboxShape: RoundedRectangleBorder(
