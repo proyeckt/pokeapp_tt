@@ -93,7 +93,7 @@ class PokemonDetailsPage extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
-                      children: pokemon.types
+                      children: (pokemon.types ?? [])
                           .map((t) => Chip(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 4.0, horizontal: 8.0),
@@ -108,7 +108,7 @@ class PokemonDetailsPage extends ConsumerWidget {
                           .toList(),
                     ),
                     const SizedBox(height: 16),
-                    Text(pokemon.description,
+                    Text(pokemon.description ?? 'Descripción no disponible',
                         style: const TextStyle(fontSize: 13)),
                     Divider(),
                     const SizedBox(height: 16),
@@ -134,11 +134,11 @@ class PokemonDetailsPage extends ConsumerWidget {
                       children: [
                         _StatBox(
                             title: 'Categoría',
-                            value: pokemon.category,
+                            value: pokemon.category ?? 'No disponible',
                             icon: Icons.category_outlined),
                         _StatBox(
                             title: 'Habilidad',
-                            value: pokemon.abilities.first,
+                            value: pokemon.abilities?.first ?? 'No disponible',
                             icon: Icons.catching_pokemon_outlined),
                       ],
                     ),
@@ -148,7 +148,7 @@ class PokemonDetailsPage extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
-                      children: pokemon.weaknesses
+                      children: (pokemon.weaknesses ?? [])
                           .map((w) => Chip(label: Text(w.capitalize())))
                           .toList(),
                     ),

@@ -2,36 +2,36 @@ class PokemonEntity {
   final int id;
   final String name;
   final String imageUrl;
-  final List<String> types;
-  final double height; // meters
-  final double weight; // kg
-  final int baseExperience;
-  final List<String> abilities;
-  final String category;
-  final String description;
-  final double maleRate; // %
-  final double femaleRate; // %
-  final List<String> weaknesses;
+  final List<String>? types;
+  final double? height; // meters
+  final double? weight; // kg
+  final int? baseExperience;
+  final List<String>? abilities;
+  final String? category;
+  final String? description;
+  final double? maleRate; // %
+  final double? femaleRate; // %
+  final List<String>? weaknesses;
 
   const PokemonEntity({
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.types,
-    required this.height,
-    required this.weight,
-    required this.baseExperience,
-    required this.abilities,
-    required this.category,
-    required this.description,
-    required this.maleRate,
-    required this.femaleRate,
-    required this.weaknesses,
+    this.types,
+    this.height,
+    this.weight,
+    this.baseExperience,
+    this.abilities,
+    this.category,
+    this.description,
+    this.maleRate,
+    this.femaleRate,
+    this.weaknesses,
   });
 
   String get formattedId => 'N°${id.toString().padLeft(3, '0')}';
-  String get displayHeight => '${height.toStringAsFixed(1)} m';
-  String get displayWeight => '${weight.toStringAsFixed(1)} kg';
+  String get displayHeight => '${height?.toStringAsFixed(1)} m';
+  String get displayWeight => '${weight?.toStringAsFixed(1)} kg';
 
   factory PokemonEntity.fromJson(Map<String, dynamic> json) {
     return PokemonEntity(

@@ -5,66 +5,49 @@ import 'package:pokeapp_tt/features/pokedex/domain/repositories/pokemon_reposito
 
 class PokemonRepositoryImpl implements PokemonRepository {
   final Dio _dio;
+  final _cache = <int, PokemonEntity>{};
 
   PokemonRepositoryImpl(this._dio);
 
   @override
   Future<(List<PokemonEntity>, String?)> getPokemons({String? nextUrl}) async {
-    try {
-      final url = nextUrl ?? 'https://pokeapi.co/api/v2/pokemon?limit=20';
-      final response = await _dio.get(url);
-      final model = PokemonResponseModel.fromJson(response.data);
+    final url = nextUrl ?? 'https://pokeapi.co/api/v2/pokemon?limit=20';
+    final response = await _dio.get(url);
+    final model = PokemonResponseModel.fromJson(response.data);
 
-      final pokemons = <PokemonEntity>[];
+    final pokemons = model.results.map((e) {
+      final id = int.parse(e.url.split('/').where((s) => s.isNotEmpty).last);
 
-      // Fetch details in parallel for better performance
-      await Future.wait(model.results.map((result) async {
-        try {
-          final id =
-              int.parse(result.url.split('/').where((s) => s.isNotEmpty).last);
+      // Base data for list display
+      return PokemonEntity(
+        id: id,
+        name: e.name,
+        imageUrl:
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png',
+        types: const [],
+        height: 0,
+        weight: 0,
+        baseExperience: 0,
+        abilities: [],
+        category: '',
+        description: '',
+        maleRate: null,
+        femaleRate: null,
+        weaknesses: [],
+      );
+    }).toList();
 
-          // Fetch details of this Pokémon
-          final detailResponse =
-              await _dio.get('https://pokeapi.co/api/v2/pokemon/$id');
-          final data = detailResponse.data;
-
-          final types = (data['types'] as List)
-              .map<String>((t) => t['type']['name'].toString())
-              .toList();
-
-          final height = (data['height'] ?? 0) / 10.0; // decimetres → metres
-          final weight = (data['weight'] ?? 0) / 10.0; // hectograms → kilograms
-          final baseExp = data['base_experience'] ?? 0;
-
-          pokemons.add(PokemonEntity(
-            id: id,
-            name: result.name,
-            imageUrl:
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png',
-            types: types,
-            height: height,
-            weight: weight,
-            baseExperience: baseExp,
-            abilities: const [],
-            category: '',
-            description: '',
-            maleRate: 0,
-            femaleRate: 0,
-            weaknesses: const [],
-          ));
-        } catch (_) {
-          // skip this Pokémon if details failed
-        }
-      }));
-
-      return (pokemons, model.next);
-    } catch (e) {
-      throw Exception('Error al obtener los Pokémon: $e');
-    }
+    return (pokemons, model.next);
   }
 
   @override
   Future<PokemonEntity> getPokemonDetails(int id) async {
+    // Return cached if exists
+    if (_cache.containsKey(id)) {
+      return _cache[id]!;
+    }
+
+    // Otherwise, fetch from API
     try {
       final detailsResponse =
           await _dio.get('https://pokeapi.co/api/v2/pokemon/$id');
@@ -103,7 +86,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
           .map<String>((a) => a['ability']['name'].toString())
           .toList();
 
-      return PokemonEntity(
+      final pokemon = PokemonEntity(
         id: id,
         name: data['name'],
         imageUrl:
@@ -119,6 +102,11 @@ class PokemonRepositoryImpl implements PokemonRepository {
         femaleRate: 0,
         weaknesses: const [],
       );
+
+      // Store pokemon to cached elements
+      _cache[id] = pokemon;
+
+      return pokemon;
     } catch (e) {
       throw Exception('Error al obtener detalles del Pokémon: $e');
     }
