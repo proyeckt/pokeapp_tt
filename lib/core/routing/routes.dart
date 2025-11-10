@@ -3,11 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:pokeapp_tt/features/home/presentation/pages/home_page.dart';
 import 'package:pokeapp_tt/features/onboarding/data/onboarding_steps.dart';
 import 'package:pokeapp_tt/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:pokeapp_tt/features/pokedex/presentation/pages/pokemon_details_page.dart';
 
 // Route names for easy reference
 class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String home = '/home';
+  static const String pokemonDetails = '/pokemonDetails';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final RouteObserver<ModalRoute<void>> routeObserver =
@@ -28,13 +30,20 @@ class AppRoutes {
 
   static List<RouteBase> get _routes => [
         GoRoute(
-          path: AppRoutes.onboarding,
+          path: onboarding,
           builder: (context, __) => OnboardingPage(
             steps: onboardingSteps,
             onCompleted: () => context.push(AppRoutes.home),
             onSkipped: () => context.push(AppRoutes.home),
           ),
         ),
-        GoRoute(path: '/home', builder: (_, __) => HomePage()),
+        GoRoute(path: home, builder: (_, __) => HomePage()),
+        GoRoute(
+          path: '$pokemonDetails/:id',
+          builder: (context, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return PokemonDetailsPage(pokemonId: id);
+          },
+        ),
       ];
 }

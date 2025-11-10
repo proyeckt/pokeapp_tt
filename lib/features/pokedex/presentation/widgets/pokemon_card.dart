@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pokeapp_tt/core/extensions/string_extensions.dart';
 import '../../domain/entities/pokemon_entity.dart';
 
 class PokemonCard extends StatefulWidget {
@@ -45,7 +47,7 @@ class _PokemonCardState extends State<PokemonCard>
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {},
+        onTap: () => context.push('/pokemonDetails/${widget.pokemon.id}'),
         child: Container(
           height: 128,
           width: double.infinity,
@@ -85,8 +87,7 @@ class _PokemonCardState extends State<PokemonCard>
 
                     // Pokémon name
                     Text(
-                      widget.pokemon.name[0].toUpperCase() +
-                          widget.pokemon.name.substring(1),
+                      widget.pokemon.name.capitalize(),
                       style: theme.textTheme.headlineSmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
