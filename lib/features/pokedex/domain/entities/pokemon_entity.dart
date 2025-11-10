@@ -30,8 +30,10 @@ class PokemonEntity {
   });
 
   String get formattedId => 'N°${id.toString().padLeft(3, '0')}';
-  String get displayHeight => '${height?.toStringAsFixed(1)} m';
-  String get displayWeight => '${weight?.toStringAsFixed(1)} kg';
+  String get displayHeight =>
+      height != null ? '${(height! / 10).toStringAsFixed(1)} m' : '-';
+  String get displayWeight =>
+      weight != null ? '${(weight! / 10).toStringAsFixed(1)} kg' : '-';
 
   factory PokemonEntity.fromJson(Map<String, dynamic> json) {
     return PokemonEntity(

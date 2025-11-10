@@ -225,7 +225,7 @@ class PokedexPage extends ConsumerWidget {
                                     const EdgeInsets.symmetric(vertical: 12)),
                             onPressed: () => Navigator.pop(context),
                             child: Text(
-                              'Aceptar',
+                              'Aplicar',
                               style: theme.textTheme.titleMedium?.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
