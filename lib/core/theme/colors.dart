@@ -8,6 +8,7 @@ class AppColors {
 
   static const Color removeActionColor = Color(0xFFCD3131);
   static const Color greyBorderColor = Color(0xFFE0E0E0);
+  static const Color greySolidColor = Color(0xFFEEEEEE);
 
   // Shadows
   static const Color blackBoxShadowColor = Color(0x1F000000);
