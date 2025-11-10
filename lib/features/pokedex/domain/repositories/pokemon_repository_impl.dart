@@ -69,8 +69,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
           .map<String>((t) => t['type']['name'].toString())
           .toList();
 
-      final height = data['height'];
-      final weight = data['weight'];
+      final height = (data['height'] as num).toDouble();
+      final weight = (data['weight'] as num).toDouble();
 
       final description = (species['flavor_text_entries'] as List)
           .firstWhere(

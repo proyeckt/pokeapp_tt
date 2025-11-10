@@ -1,6 +1,6 @@
 # 🚀 PokéApp – Technical Test - Global66
 
-A production-ready Flutter mobile app created for the Global66 technical test. This project demonstrates my approach to clean architecture, reactive state management, API integration, and modern UI/UX with Material Design.
+A technical test challenge which involved developing a Flutter mobile app created for the Global66 technical test. This project demonstrates my approach to clean architecture, reactive state management, API integration, and modern UI/UX with Material Design.
 
 ---
 
@@ -43,11 +43,24 @@ This app showcases a well-structured Flutter codebase, focusing on:
    [Flutter Installation Guide](https://docs.flutter.dev/get-started/install)
 
 2. **Clone the repo**:  
-git clone https://github.com/yourusername/pokemon_flutter_app.git
-cd pokemon_flutter_app
+> git clone https://github.com/proyeckt/pokeapp_tt.git
 
-3. **Install dependencies**:  
+> cd pokeapp_tt
 
+3. **Clean the project**  
+> flutter clean
+
+4. **Clean build runner generated files**  
+> dart run build_runner clean
+
+5. **Generate build runner files**  
+> dart run build_runner build --delete-conflicting-outputs
+
+6. **Install dependencies**:  
+> flutter pub get
+
+7. **After running these commands, you can launch the app with**
+> flutter run
 
 
 ---
@@ -76,7 +89,7 @@ This project follows **Clean Architecture** principles for maintainability and s
 AI tools were used strictly for **assistance** in:
 
 - Generating boilerplate documentation and README
-- Explaining architecture and code structure
+- Buddy programming, asking questions and discussing scenarios.
 - Suggesting clean UI patterns and best practices
 - Reviewing non-sensitive code for clarity
 
@@ -91,26 +104,6 @@ AI tools were used strictly for **assistance** in:
 - **Material Design** for phishing-resistant UI
 
 ---
-
-## 💡 Choice Summary
-
-- **Flutter/Dart**: Proven stability and ecosystem for mobile apps.
-- **Riverpod with annotations**: Type-safe, easy-to-maintain state without boilerplate.
-- **Freezed**: Model immutability, easy-to-use data classes, built-in `copyWith` and serialization.
-- **Clean Architecture**: Decoupled, testable, scalable layers.
-- **Material Design**: Consistent, modern, accessible UI.
-
----
-
-## 📄 License
-
-Distributed under the [MIT License](LICENSE).
-
----
-
-👋 Thank you for reviewing my submission.  
-If you have any questions about the code, design decisions, or technical approaches, I’m happy to discuss!  
-
 
 ## 💡 Choice Summary
 

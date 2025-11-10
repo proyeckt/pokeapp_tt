@@ -27,7 +27,10 @@ class PokemonDetailsPage extends ConsumerWidget {
     return Scaffold(
       body: state.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, _) => ErrorPage(onRetry: detailsController.loadDetails),
+          error: (err, _) {
+            print('error:${err.toString()}');
+            return ErrorPage(onRetry: detailsController.loadDetails);
+          },
           data: (pokemon) {
             final typeColor = PokemonTypeMapper.getTypeColor(
                 pokemon.types?.first ?? 'normal');
